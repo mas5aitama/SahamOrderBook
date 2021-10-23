@@ -1,6 +1,5 @@
 package com.SahamOrderBook.apps.contoller
 
-import com.SahamOrderBook.apps.dto.RegisterDTO
 import com.SahamOrderBook.apps.entitity.User
 import com.SahamOrderBook.apps.repository.UserRepository
 import com.SahamOrderBook.apps.response.ResponseHandler
@@ -16,11 +15,8 @@ import javax.validation.Valid
 @RequestMapping("api")
 class UserController(private val userRepository: UserRepository) {
     @PostMapping("/register")
-    fun createUser(@Valid @RequestBody body: RegisterDTO): ResponseEntity<Any> {
+    fun createUser(@Valid @RequestBody user: User): ResponseEntity<Any> {
         return try {
-            val user = User()
-            user.email = body.email
-            user.password = body.password
             val result = userRepository.save(user)
             val countTbl: Long = userRepository.count()
             ResponseHandler.generateResponse("Save! Succcess", HttpStatus.OK, result, countTbl)
@@ -29,5 +25,4 @@ class UserController(private val userRepository: UserRepository) {
             ResponseHandler.generateResponse(e.message!!, HttpStatus.MULTI_STATUS, "Email Already Exist", countTbl)
         }
     }
-
 }
