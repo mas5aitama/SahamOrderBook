@@ -1,7 +1,8 @@
-package com.SahamOrderBook.apps.contoller
+package com.SahamOrderBook.apps.controller
 
-import com.SahamOrderBook.apps.entitity.OrderBook
-import com.SahamOrderBook.apps.repository.OrderBookRepository
+
+import com.SahamOrderBook.apps.entity.Saham
+import com.SahamOrderBook.apps.repository.SahamRepository
 import com.SahamOrderBook.apps.response.ResponseHandler
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -12,68 +13,67 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = arrayOf("http://localhost:8080"))
+class SahamController(private val sahamRepository: SahamRepository) {
 
-class OrderBookController(private val orderBookRepository: OrderBookRepository)  {
-
-    @GetMapping(value = ["/order-book"])
-    fun getAllOrderBook(): ResponseEntity<Any> {
+    @GetMapping(value = ["/saham"])
+    fun getAllSaham(): ResponseEntity<Any> {
         return try {
-            val result: List<OrderBook> = orderBookRepository.findAll()
-            val countTbl: Long = orderBookRepository.count()
+            val result: List<Saham> = sahamRepository.findAll()
+            val countTbl: Long = sahamRepository.count()
             ResponseHandler.generateResponse("Successfully retrieved data!", HttpStatus.OK, result, countTbl)
 
         } catch (e: Exception) {
-            val countTbl: Long = orderBookRepository.count()
+            val countTbl: Long = sahamRepository.count()
             ResponseHandler.generateResponse(e.message!!, HttpStatus.MULTI_STATUS, "Dont Have Data", countTbl)
         }
     }
 
-    @GetMapping(value = ["/order-book/{id}"])
-    fun getOrderBookById(@PathVariable id: Long): ResponseEntity<Any> {
+    @GetMapping(value = ["/saham/{id}"])
+    fun getSahamId(@PathVariable id: String): ResponseEntity<Any> {
         return try {
-            val result: Optional<OrderBook> = orderBookRepository.findById(id)
-            val countTbl: Long = orderBookRepository.count()
+            val result: Optional<Saham> = sahamRepository.findById(id)
+            val countTbl: Long = sahamRepository.count()
             ResponseHandler.generateResponse("Successfully retrieved data!", HttpStatus.OK, result, countTbl)
         } catch (e: Exception) {
-            val countTbl: Long = orderBookRepository.count()
+            val countTbl: Long = sahamRepository.count()
             ResponseHandler.generateResponse(e.message!!, HttpStatus.MULTI_STATUS, "cant found, your ID", countTbl)
         }
     }
 
-    @PostMapping("/order-book")
-    fun createOrderBook(@Valid @RequestBody orderBook: OrderBook): ResponseEntity<Any> {
+    @PostMapping("/saham")
+    fun createSaham(@Valid @RequestBody saham: Saham): ResponseEntity<Any> {
         return try {
-            val result = orderBookRepository.save(orderBook)
-            val countTbl: Long = orderBookRepository.count()
+            val result = sahamRepository.save(saham)
+            val countTbl: Long = sahamRepository.count()
             ResponseHandler.generateResponse("Save! Succcess", HttpStatus.OK, result, countTbl)
         } catch (e: Exception) {
-            val countTbl: Long = orderBookRepository.count()
+            val countTbl: Long = sahamRepository.count()
             ResponseHandler.generateResponse(e.message!!, HttpStatus.MULTI_STATUS, "Not Found Your ID", countTbl)
         }
     }
 
-    @DeleteMapping("/order-book/{id}")
-    fun deleteOrderBookById(@PathVariable id: Long): ResponseEntity<Any> {
+    @DeleteMapping("/saham/{id}")
+    fun deleteSahamId(@PathVariable id: String): ResponseEntity<Any> {
         return try {
-            val result = orderBookRepository.deleteById(id)
-            val countTbl: Long = orderBookRepository.count()
+            val result: Unit = sahamRepository.deleteById(id)
+            val countTbl: Long = sahamRepository.count()
             ResponseHandler.generateResponse("Deleted! Succcess", HttpStatus.OK, result, countTbl)
         } catch (e: Exception) {
-            val countTbl: Long = orderBookRepository.count()
+            val countTbl: Long = sahamRepository.count()
             ResponseHandler.generateResponse(e.message!!, HttpStatus.MULTI_STATUS, "Not Found Your ID", countTbl)
         }
     }
 
-    @PutMapping("/order-book/{id}")
+    @PutMapping("/saham/{id}")
     fun updateOrderBook(
-        @PathVariable(value = "id", required = false) id: Int, @Valid @RequestBody orderBook: OrderBook,
+        @PathVariable(value = "id", required = false) id: Int, @Valid @RequestBody saham: Saham,
     ): ResponseEntity<Any> {
         return try {
-            val result = orderBookRepository.save(orderBook)
-            val countTbl: Long = orderBookRepository.count()
+            val result = sahamRepository.save(saham)
+            val countTbl: Long = sahamRepository.count()
             ResponseHandler.generateResponse("Updated", HttpStatus.OK, result, countTbl)
         } catch (e: Exception) {
-            val countTbl: Long = orderBookRepository.count()
+            val countTbl: Long = sahamRepository.count()
             ResponseHandler.generateResponse(e.message!!, HttpStatus.MULTI_STATUS, "Updated Failed", countTbl)
         }
     }

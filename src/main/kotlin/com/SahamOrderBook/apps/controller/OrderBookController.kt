@@ -1,6 +1,6 @@
-package com.SahamOrderBook.apps.contoller
+package com.SahamOrderBook.apps.controller
 
-import com.SahamOrderBook.apps.entitity.OrderBook
+import com.SahamOrderBook.apps.entity.OrderBook
 import com.SahamOrderBook.apps.repository.OrderBookRepository
 import com.SahamOrderBook.apps.response.ResponseHandler
 import org.springframework.http.HttpStatus

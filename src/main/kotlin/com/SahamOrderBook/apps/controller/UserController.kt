@@ -1,21 +1,16 @@
-package com.SahamOrderBook.apps.contoller
+package com.SahamOrderBook.apps.controller
 
 
-import com.SahamOrderBook.apps.entitity.User
+import com.SahamOrderBook.apps.entity.User
 import com.SahamOrderBook.apps.repository.UserRepository
 import com.SahamOrderBook.apps.response.ResponseHandler
 import com.SahamOrderBook.apps.service.UserService
-import com.fasterxml.jackson.core.JsonParseException
-import com.fasterxml.jackson.databind.JsonMappingException
-import com.fasterxml.jackson.databind.ObjectMapper
-import org.springframework.core.io.ClassPathResource
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
-import java.io.IOException
 import java.net.URI
 
 

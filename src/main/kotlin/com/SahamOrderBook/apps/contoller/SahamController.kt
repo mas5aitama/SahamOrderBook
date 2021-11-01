@@ -66,7 +66,7 @@ class SahamController(private val sahamRepository: SahamRepository) {
 
     @PutMapping("/saham/{id}")
     fun updateOrderBook(
-        @PathVariable(value = "id", required = false) id: String, @Valid @RequestBody saham: Saham,
+        @PathVariable(value = "id", required = false) id: Int, @Valid @RequestBody saham: Saham,
     ): ResponseEntity<Any> {
         return try {
             val result = sahamRepository.save(saham)

@@ -1,4 +1,4 @@
-package com.SahamOrderBook.apps.entitity
+package com.SahamOrderBook.apps.entity
 
 import javax.persistence.*
 import javax.validation.constraints.NotNull

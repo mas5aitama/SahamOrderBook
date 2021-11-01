@@ -1,4 +1,4 @@
-package com.SahamOrderBook.apps.entitity
+package com.SahamOrderBook.apps.entity
 
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 import javax.persistence.*
@@ -28,8 +28,4 @@ class User {
     @Lob
     @Column
     lateinit var profilePicture: ByteArray
-
-
-
-
 }
