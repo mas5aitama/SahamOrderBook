@@ -37,23 +37,6 @@ class UserController(private val userRepository: UserRepository, private  val us
 
     }
 
-
-/*
-
-    @GetMapping(value = ["/user"])
-    fun getAllSaham(): ResponseEntity<Any> {
-        return try {
-            val result: List<User> = userRepository.findAll()
-            val countTbl: Long = userRepository.count()
-            ResponseHandler.generateResponse("Successfully retrieved data!", HttpStatus.OK, result, countTbl)
-
-        } catch (e: Exception) {
-            val countTbl: Long = userRepository.count()
-            ResponseHandler.generateResponse(e.message!!, HttpStatus.MULTI_STATUS, "Dont Have Data", countTbl)
-        }
-    }
-*/
-
     @PostMapping("/register",consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     fun createUser(@PathVariable user: User, file: MultipartFile, passwordEncoder: Argon2PasswordEncoder): ResponseEntity<Any> {
         return try {
@@ -70,15 +53,5 @@ class UserController(private val userRepository: UserRepository, private  val us
         }
     }
 
-   /* @PostMapping(value = ["/saveProduct"])
-    @Throws(JsonParseException::class,
-        JsonMappingException::class,
-        IOException::class)
-    fun saveProduct(@RequestParam("file") file: MultipartFile, @RequestParam("user") user: String?): ResponseEntity<Any> {
-        val product1: User = ObjectMapper().readValue(user, User::class.java).also {
-            it.profilePicture
-        }
-        userService.save(product1)
-    }*/
 
 }
