@@ -1,6 +1,6 @@
-package com.SahamOrderBook.apps.repository
+package com.SahamOrderBook.repository
 
-import com.SahamOrderBook.apps.entity.Saham
+import com.SahamOrderBook.entity.Saham
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

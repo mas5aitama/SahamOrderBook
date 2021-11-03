@@ -1,0 +1,72 @@
+logging:
+    file:
+        name: ../saham-order-book.log
+    level:
+        org:
+            hibernate:
+                SQL: debug
+            springframework:
+                security: info
+                web: info
+        root: info
+server:
+    error:
+        include-exception: true
+        include-stacktrace: always
+        path: /user-error=null
+    max-http-header-size: 8KB
+    server:
+        address: my_custom_ip=10.1.0.149
+    tomcat:
+        accesslog:
+            directory: logs
+            enabled: true
+            file-date-format: '2021-10-03'
+            prefix: access_log
+            suffix: .log
+        max-swallow-size: 2MB
+        threads:
+            max: 200
+spring:
+    cache:
+        jcache:
+            provider: org.ehcache.jsr107.EhcacheCachingProvider
+    data:
+        rest:
+            base-path: /api
+            default-page-size: 20
+            detection-strategy: annotated
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:postgresql://localhost:5432/db_saham
+        username: pandhu
+        password: admin
+        hikari:
+            auto-commit: false
+            idle-timeout: 300000
+            max-lifetime: 1800000
+            maximum-pool-size: 50
+            minimum-idle: 5
+
+    jpa:
+        database: POSTGRESQL
+        database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+        generate-ddl: true
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                cache:
+                    region:
+                        factory_class: jcache
+                    use_query_cache: true
+                    use_second_level_cache: true
+                connection:
+                    provider_disables_autocommit: true
+                format_sql: true
+                hbm2ddl:
+                    auto: update
+                jdbc:
+                    batch_size: 16
+                    fetch_size: 100
+                max_fetch_depth: 3
