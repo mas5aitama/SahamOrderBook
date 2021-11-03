@@ -9,6 +9,7 @@ logging:
                 security: info
                 web: info
         root: info
+
 server:
     servlet:
         context-path: /saham-demo
