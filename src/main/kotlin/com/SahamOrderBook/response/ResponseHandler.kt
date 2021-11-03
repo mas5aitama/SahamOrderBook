@@ -1,4 +1,4 @@
-package com.SahamOrderBook.apps.response
+package com.SahamOrderBook.response
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
