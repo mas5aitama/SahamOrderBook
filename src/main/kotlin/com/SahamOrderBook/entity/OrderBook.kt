@@ -1,14 +1,15 @@
-package com.SahamOrderBook.apps.entity
+package com.SahamOrderBook.entity
 
 import javax.persistence.*
 import javax.validation.constraints.NotNull
+
 
 @Entity
 @Table(name = "order_book")
 class OrderBook {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Int? = 0
+    var id: Long? = 0
 
     @NotNull
     @Column
