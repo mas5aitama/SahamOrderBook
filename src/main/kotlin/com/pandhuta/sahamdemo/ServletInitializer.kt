@@ -1,12 +1,13 @@
-package com.sahamorderbook
+package com.pandhuta.sahamdemo
 
 import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
+
 class ServletInitializer : SpringBootServletInitializer() {
 
     override fun configure(application: SpringApplicationBuilder): SpringApplicationBuilder {
-        return application.sources(SahamOrderBookApplication::class.java)
+        return application.sources(SahamDemoApplication::class.java)
     }
 
 }

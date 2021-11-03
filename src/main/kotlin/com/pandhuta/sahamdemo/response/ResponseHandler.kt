@@ -1,18 +1,18 @@
-package com.SahamOrderBook.response
+package com.pandhuta.sahamdemo.response
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
 
 object ResponseHandler {
-    fun generateResponse(message: String, status: HttpStatus, responseObj: Any, countTbl:Long
-
+    fun generateResponse(
+        message: String, status: HttpStatus, response: Any, count: Long
     ): ResponseEntity<Any> {
         val map: MutableMap<String, Any> = HashMap()
         map["message"] = message
         map["status"] = status.value()
-        map["data"] = responseObj
-        map["countOfTable"] = countTbl
+        map["data"] = response
+        map["count"] = count
         return ResponseEntity(map, status)
     }
 }

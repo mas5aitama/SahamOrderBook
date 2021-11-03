@@ -1,17 +1,19 @@
-package com.SahamOrderBook.controller
+package com.pandhuta.sahamdemo.controller
 
-
-import com.SahamOrderBook.entity.User
-import com.SahamOrderBook.repository.UserRepository
-import com.SahamOrderBook.response.ResponseHandler
+import com.pandhuta.sahamdemo.entity.User
+import com.pandhuta.sahamdemo.repository.UserRepository
+import com.pandhuta.sahamdemo.response.ResponseHandler
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
+
 @RestController
-@CrossOrigin(origins = ["http://localhost:8080"])
 class UserController(private val userRepository: UserRepository) {
+
     @PostMapping("/register")
     fun createUser(@Valid @RequestBody user: User): ResponseEntity<Any> {
         return try {
