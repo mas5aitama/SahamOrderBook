@@ -1,9 +1,9 @@
-package com.SahamOrderBook.apps.controller
+package com.SahamOrderBook.controller
 
 
-import com.SahamOrderBook.apps.entity.Saham
-import com.SahamOrderBook.apps.repository.SahamRepository
-import com.SahamOrderBook.apps.response.ResponseHandler
+import com.SahamOrderBook.entity.Saham
+import com.SahamOrderBook.repository.SahamRepository
+import com.SahamOrderBook.response.ResponseHandler
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -11,8 +11,7 @@ import java.util.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin(origins = arrayOf("http://localhost:8080"))
+@CrossOrigin(origins = ["http://localhost:8080"])
 class SahamController(private val sahamRepository: SahamRepository) {
 
     @GetMapping(value = ["/saham"])
