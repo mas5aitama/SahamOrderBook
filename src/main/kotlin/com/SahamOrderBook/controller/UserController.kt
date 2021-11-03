@@ -1,23 +1,19 @@
-package com.SahamOrderBook.apps.controller
+package com.SahamOrderBook.controller
 
 
-import com.SahamOrderBook.apps.entity.User
-import com.SahamOrderBook.apps.repository.UserRepository
-import com.SahamOrderBook.apps.response.ResponseHandler
+import com.SahamOrderBook.entity.User
+import com.SahamOrderBook.repository.UserRepository
+import com.SahamOrderBook.response.ResponseHandler
 import org.springframework.http.HttpStatus
-import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.multipart.MultipartFile
-import java.net.URI
-
+import javax.validation.Valid
 
 @RestController
-@RequestMapping("api")
+@CrossOrigin(origins = ["http://localhost:8080"])
 class UserController(private val userRepository: UserRepository) {
-    @PostMapping("/register",consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
-    fun createUser(@PathVariable user: User, file: MultipartFile, passwordEncoder: Argon2PasswordEncoder): ResponseEntity<Any> {
+    @PostMapping("/register")
+    fun createUser(@Valid @RequestBody user: User): ResponseEntity<Any> {
         return try {
             val result = userRepository.save(user)
             val countTbl: Long = userRepository.count()
@@ -27,6 +23,4 @@ class UserController(private val userRepository: UserRepository) {
             ResponseHandler.generateResponse(e.message!!, HttpStatus.MULTI_STATUS, "Email Already Exist", countTbl)
         }
     }
-
-
 }
