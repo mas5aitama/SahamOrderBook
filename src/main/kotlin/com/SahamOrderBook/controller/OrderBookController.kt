@@ -1,8 +1,8 @@
-package com.SahamOrderBook.apps.controller
+package com.SahamOrderBook.controller
 
-import com.SahamOrderBook.apps.entity.OrderBook
-import com.SahamOrderBook.apps.repository.OrderBookRepository
-import com.SahamOrderBook.apps.response.ResponseHandler
+import com.SahamOrderBook.entity.OrderBook
+import com.SahamOrderBook.repository.OrderBookRepository
+import com.SahamOrderBook.response.ResponseHandler
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -10,10 +10,8 @@ import java.util.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin(origins = arrayOf("http://localhost:8080"))
-
-class OrderBookController(private val orderBookRepository: OrderBookRepository)  {
+@CrossOrigin(origins = ["http://localhost:8080"])
+class OrderBookController(private val orderBookRepository: OrderBookRepository) {
 
     @GetMapping(value = ["/order-book"])
     fun getAllOrderBook(): ResponseEntity<Any> {
