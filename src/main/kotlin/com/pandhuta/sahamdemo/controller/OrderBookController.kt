@@ -103,9 +103,16 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
 
     @PutMapping("/order-book/{id}")
     fun updateOrderBook(
-        @PathVariable("id") id: Int, @Valid @RequestBody orderBook: OrderBook,
+        @PathVariable("id") id: Long, @Valid @RequestBody orderBook: OrderBook,
     ): ResponseEntity<Any> {
         return try {
+            val found: OrderBook = orderBookRepository.findById(id).get()
+            found.bidOrder = orderBook.bidOrder
+            found.bidLot = orderBook.bidLot
+            found.bidPrice = orderBook.bidPrice
+            found.offerPrice = orderBook.offerPrice
+            found.offerLot  = orderBook.offerLot
+            found.offerOrder = orderBook.offerOrder
             // TODO: Code pada bagian ini diperbaiki.
             //  Sebagai contoh, lihat method: updateSaham()
             val result = orderBookRepository.save(orderBook)
