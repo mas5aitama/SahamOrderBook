@@ -67,6 +67,7 @@ class Saham {
                 "lastPrice = $lastPrice , changeValue = $changeValue , " +
                 "changePercent = $changePercent , priceClose = $priceClose , " +
                 "priceOpen = $priceOpen , priceHigh = $priceHigh , priceLow = $priceLow )"
+
     }
 
 }
