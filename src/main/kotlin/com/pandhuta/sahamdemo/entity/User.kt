@@ -10,6 +10,7 @@ import javax.persistence.*
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "ms_user")
 class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int? = 0
