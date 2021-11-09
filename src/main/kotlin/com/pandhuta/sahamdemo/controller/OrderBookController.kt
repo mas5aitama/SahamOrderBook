@@ -32,7 +32,7 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
     }
 
     @GetMapping(value = ["/order-book/{id}"])
-    fun findOrderBookById(@PathVariable id: Long): ResponseEntity<Any> {
+    fun findOrderBookById(@PathVariable id: UUID): ResponseEntity<Any> {
         return try {
             val result: Optional<OrderBook> = orderBookRepository.findById(id)
 
@@ -48,7 +48,7 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
         }
     }
 
-    @GetMapping(value = ["/order-book/saham/{code}"])
+    /*@GetMapping(value = ["/order-book/saham/{code}"])
     fun findOrderBookByKodeSaham(@PathVariable code: String): ResponseEntity<Any> {
         return try {
             val result: List<OrderBook> = orderBookRepository.findBySahamKodeSahamOrderByBidPriceDesc(code)
@@ -63,7 +63,7 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
                 "Data saham tidak ditemukan", 0
             )
         }
-    }
+    }*/
 
     @PostMapping("/order-book")
     fun createOrderBook(@Valid @RequestBody orderBook: OrderBook): ResponseEntity<Any> {
@@ -83,7 +83,7 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
     }
 
     @DeleteMapping("/order-book/{id}")
-    fun deleteOrderBook(@PathVariable id: Long): ResponseEntity<Any> {
+    fun deleteOrderBook(@PathVariable id: UUID): ResponseEntity<Any> {
         return try {
             val found: OrderBook = orderBookRepository.findById(id).get()
 
@@ -103,7 +103,7 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
 
     @PutMapping("/order-book/{id}")
     fun updateOrderBook(
-        @PathVariable("id") id: Long, @Valid @RequestBody orderBook: OrderBook,
+        @PathVariable("id") id: UUID, @Valid @RequestBody orderBook: OrderBook,
     ): ResponseEntity<Any> {
         return try {
             val found: OrderBook = orderBookRepository.findById(id).get()
@@ -111,7 +111,7 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
             found.bidLot = orderBook.bidLot
             found.bidPrice = orderBook.bidPrice
             found.offerPrice = orderBook.offerPrice
-            found.offerLot  = orderBook.offerLot
+            found.offerLot = orderBook.offerLot
             found.offerOrder = orderBook.offerOrder
             // TODO: Code pada bagian ini diperbaiki.
             //  Sebagai contoh, lihat method: updateSaham()
