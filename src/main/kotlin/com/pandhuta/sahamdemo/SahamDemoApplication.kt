@@ -13,6 +13,7 @@ import org.springframework.boot.runApplication
     ],
     exclude = [SecurityAutoConfiguration::class] // temporary disable SpringSecurity
 )
+
 @ConfigurationPropertiesScan("com.pandhuta.sahamdemo.config")
 @EntityScan("com.pandhuta.sahamdemo.entity")
 class SahamDemoApplication

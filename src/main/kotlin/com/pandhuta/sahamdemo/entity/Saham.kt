@@ -4,10 +4,7 @@ import org.hibernate.Hibernate
 import org.hibernate.annotations.Cache
 import org.hibernate.annotations.CacheConcurrencyStrategy
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 import javax.validation.constraints.NotNull
 
 
@@ -58,13 +55,9 @@ class Saham {
     @Column
     var domesticBuy: Double? = null
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as Saham
-
-        return Objects.equals(kodeSaham, other.kodeSaham) && Objects.equals(namaSaham, other.namaSaham)
-    }
+    @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
+    @JoinColumn(name = "kode_saham")
+    val orderbook: List<OrderBook>? = ArrayList<OrderBook>()
 
     override fun hashCode(): Int = 32 + Objects.hash(kodeSaham, namaSaham) // javaClass.hashCode()
 
