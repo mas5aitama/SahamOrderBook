@@ -55,9 +55,7 @@ class Saham {
     @Column
     var domesticBuy: Double? = null
 
-    @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
-    @JoinColumn(name = "kode_saham")
-    val orderbook: List<OrderBook>? = ArrayList<OrderBook>()
+
 
     override fun hashCode(): Int = 32 + Objects.hash(kodeSaham, namaSaham) // javaClass.hashCode()
 
