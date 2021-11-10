@@ -1,0 +1,61 @@
+logging:
+    file:
+        name: ../saham-demo.log
+    level:
+        org:
+            hibernate:
+                SQL: debug
+            springframework:
+                security: info
+                web: info
+        root: info
+
+server:
+    servlet:
+        context-path: /saham-demo
+
+spring:
+    datasource:
+        username: <db-user>
+        password: <db-password>
+        url: jdbc:postgresql://localhost:5432/<database-name>
+        type: com.zaxxer.hikari.HikariDataSource
+        hikari:
+            auto-commit: false
+            minimum-idle: 5
+            idle-timeout: 300000
+            max-lifetime: 1800000
+            maximum-pool-size: 50
+    mvc:
+        contentnegotiation:
+            favor-parameter: true
+    cache:
+        jcache:
+            provider: org.ehcache.jsr107.EhcacheCachingProvider
+    jpa:
+        database: POSTGRESQL
+        database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+        generate-ddl: true
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                format_sql: true
+                cache:
+                    use_second_level_cache: true
+                    use_query_cache: true
+                    region:
+                        factory_class: jcache
+                connection:
+                    provider_disables_autocommit: true
+                hbm2ddl:
+                    auto: update
+                max_fetch_depth: 3
+                jdbc:
+                    fetch_size: 100
+                    batch_size: 16
+    data:
+        rest:
+            default-page-size: 20
+            detection-strategy: annotated
+            base-path: /api
