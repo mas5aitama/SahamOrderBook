@@ -2,6 +2,7 @@ package com.pandhuta.sahamdemo.controller
 
 import com.pandhuta.sahamdemo.entity.OrderBook
 import com.pandhuta.sahamdemo.repository.OrderBookRepository
+import com.pandhuta.sahamdemo.repository.SahamRepository
 import com.pandhuta.sahamdemo.response.ResponseHandler
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -11,7 +12,8 @@ import javax.validation.Valid
 
 
 @RestController
-class OrderBookController(private val orderBookRepository: OrderBookRepository) {
+class OrderBookController(private val orderBookRepository: OrderBookRepository,
+                          private val sahamRepository: SahamRepository) {
 
     @GetMapping(value = ["/order-book"])
     fun findAllOrderBook(): ResponseEntity<Any> {
@@ -32,7 +34,7 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
     }
 
     @GetMapping(value = ["/order-book/{id}"])
-    fun findOrderBookById(@PathVariable id: UUID): ResponseEntity<Any> {
+    fun findOrderBookById(@PathVariable id: Long): ResponseEntity<Any> {
         return try {
             val result: Optional<OrderBook> = orderBookRepository.findById(id)
 
@@ -48,7 +50,7 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
         }
     }
 
-    /*@GetMapping(value = ["/order-book/saham/{code}"])
+    @GetMapping(value = ["/order-book/saham/{code}"])
     fun findOrderBookByKodeSaham(@PathVariable code: String): ResponseEntity<Any> {
         return try {
             val result: List<OrderBook> = orderBookRepository.findBySahamKodeSahamOrderByBidPriceDesc(code)
@@ -63,13 +65,14 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
                 "Data saham tidak ditemukan", 0
             )
         }
-    }*/
+    }
 
-    @PostMapping("/order-book")
-    fun createOrderBook(@Valid @RequestBody orderBook: OrderBook): ResponseEntity<Any> {
+    @PostMapping("/order-book/{kode}")
+    fun createOrderBook(@PathVariable kode: String, @Valid @RequestBody newOrderBook: OrderBook): ResponseEntity<Any> {
         return try {
-            val result = orderBookRepository.save(orderBook)
-
+            val parent = sahamRepository.findById(kode).get()
+            newOrderBook.saham = parent
+            val result = orderBookRepository.save(newOrderBook)
             ResponseHandler.generateResponse(
                 "Data OrderBook berhasil disimpan",
                 HttpStatus.OK, result, 1
@@ -83,7 +86,7 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
     }
 
     @DeleteMapping("/order-book/{id}")
-    fun deleteOrderBook(@PathVariable id: UUID): ResponseEntity<Any> {
+    fun deleteOrderBook(@PathVariable id: Long): ResponseEntity<Any> {
         return try {
             val found: OrderBook = orderBookRepository.findById(id).get()
 
@@ -103,7 +106,7 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository) 
 
     @PutMapping("/order-book/{id}")
     fun updateOrderBook(
-        @PathVariable("id") id: UUID, @Valid @RequestBody orderBook: OrderBook,
+        @PathVariable("id") id: Long, @Valid @RequestBody orderBook: OrderBook,
     ): ResponseEntity<Any> {
         return try {
             val found: OrderBook = orderBookRepository.findById(id).get()
