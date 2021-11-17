@@ -129,7 +129,7 @@
             <version>1.69</version>
         </dependency>
 
-        <!--JWTs, digunakan untuk keamanan verifikasi Token-->
+        <!--JWTs, digunakan untuk keamanan verifikasi Token.-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
