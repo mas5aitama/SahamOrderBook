@@ -29,6 +29,7 @@ class UserController(private val userRepository: UserRepository, private val use
         } catch (e: Exception) {
             ResponseHandler.generateResponse(e.message!!, HttpStatus.NOT_FOUND, "Email Already Exist", 0)
         }
+
     }
 
     @PostMapping("/login")
@@ -53,6 +54,7 @@ class UserController(private val userRepository: UserRepository, private val use
 
         response.addCookie(cookie)
         return ResponseEntity.status(HttpStatus.OK).body("Welcome, success login")
+
     }
 
     @PostMapping("/logout")
@@ -61,5 +63,6 @@ class UserController(private val userRepository: UserRepository, private val use
         cookie.maxAge = 0
         response.addCookie(cookie)
         return ResponseEntity.status(HttpStatus.OK).body("Welcome, success logout")
+
     }
 }
