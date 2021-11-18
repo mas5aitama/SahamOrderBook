@@ -9,7 +9,8 @@ import org.springframework.boot.runApplication
 
 @SpringBootApplication(
     scanBasePackages = [
-        "com.pandhuta.sahamdemo.controller", "com.pandhuta.sahamdemo.repository"
+        "com.pandhuta.sahamdemo.controller", "com.pandhuta.sahamdemo.repository",
+        "com.pandhuta.sahamdemo.service","com.pandhuta.sahamdemo.dto"
     ],
     exclude = [SecurityAutoConfiguration::class] // temporary disable SpringSecurity
 )
