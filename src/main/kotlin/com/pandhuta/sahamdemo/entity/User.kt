@@ -10,7 +10,7 @@ import javax.persistence.*
 @Table(name = "ms_user")
 class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = 0
 
     @Column(unique = true, nullable = false)
@@ -24,4 +24,7 @@ class User {
             field = passwordEncoder.encode(value)
         }
 
+    fun comparePassword(credential: String): Boolean {
+        return Argon2PasswordEncoder().matches(credential, this.credential)
+    }
 }
