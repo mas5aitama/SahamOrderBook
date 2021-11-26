@@ -118,7 +118,7 @@ class OrderBookController(private val orderBookRepository: OrderBookRepository,
             found.offerOrder = orderBook.offerOrder
             // TODO: Code pada bagian ini diperbaiki.
             //  Sebagai contoh, lihat method: updateSaham()
-            val result = orderBookRepository.save(orderBook)
+            val result = orderBookRepository.save(found)
             ResponseHandler.generateResponse(
                 "Data saham berhasil diperbarui",
                 HttpStatus.OK, result, 1
